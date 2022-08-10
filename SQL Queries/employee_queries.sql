@@ -86,7 +86,7 @@ group by last_name
 order by last_name desc;
 
 
--- List the top 25 paid employess, including their name, title, department, gender, and their salary:
+-- List the top 25 paid employees, including their name, title, department, gender, and their salary:
 select
 	last_name as "Last Name",
 	first_name as "First Name",
