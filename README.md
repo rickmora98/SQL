@@ -26,3 +26,13 @@ or put your postgresql password into a config.py file before running. <br>
 #### Entity Relationship Diagram:
  
 <img src="Images/TableRelationshipDiagram.png"> <br>
+
+#### Query To Show Top 25 Paid Employees:
+
+<img src="Images/TopEarners.jpg"> <br>
+
+#### Query To Show Top 5 Paid Employees in Each Department:
+
+<img src="Images/Top5EarnersPerDept.jpg"> <br>
+
+
