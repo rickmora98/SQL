@@ -84,3 +84,20 @@ select
 from employees
 group by last_name
 order by last_name desc;
+
+
+-- List the top 25 paid employess, including their name, title, department, gender, and their salary:
+select
+	last_name as "Last Name",
+	first_name as "First Name",
+	sex as "Gender",
+	title as "Job Title",
+	dept_name as "Department",	
+	salary as "Salary"
+from employees
+join salaries on employees.emp_no = salaries.emp_no
+join titles on employees.emp_title_id = titles.title_id
+join dept_emp on employees.emp_no = dept_emp.emp_no
+join departments on dept_emp.dept_no = departments.dept_no
+order by salary desc
+limit 25;
