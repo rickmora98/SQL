@@ -101,3 +101,34 @@ join dept_emp on employees.emp_no = dept_emp.emp_no
 join departments on dept_emp.dept_no = departments.dept_no
 order by salary desc
 limit 25;
+
+
+-- List the top 5 paid employees in each department, including their name, title, department, gender, and their salary:
+with temp as (
+	select
+		row_number() over (partition by dept_name order by salary desc) as "row_num",
+		dept_name as "Department",	
+		last_name as "Last Name",
+		first_name as "First Name",
+		sex as "Gender",
+		title as "Job Title",
+		salary as "Salary"
+	from employees
+	join salaries on employees.emp_no = salaries.emp_no
+	join titles on employees.emp_title_id = titles.title_id
+	join dept_emp on employees.emp_no = dept_emp.emp_no
+	join departments on dept_emp.dept_no = departments.dept_no
+	)
+
+select 
+	"Department",
+	"Last Name",
+	"First Name",
+	"Gender",
+	"Job Title",
+	"Salary"
+from temp
+where row_num <=5
+order by
+	"Department",
+	"Salary" desc;
