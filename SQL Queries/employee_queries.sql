@@ -132,3 +132,74 @@ where row_num <=5
 order by
 	"Department",
 	"Salary" desc;
+
+
+-- What is the lowest salary and how many employees are paid it?
+select 
+	salary as "Lowest Salary", 
+	count(*) as "Number of Employees Paid This"
+from salaries
+where salary = (select min(salary) from salaries)
+group by salary;
+
+
+-- How many employees earn more than 100,000?
+select count(*) as "Number of Employees Paid More than 100,000"
+from salaries
+where salary > 100000;
+
+
+-- Show the distribution of all salaries within the company:
+select 
+	text('1 - 40,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 1 and 40000
+union
+select 
+	text('40,001 - 50,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 40001 and 50000
+union
+select 
+	text('50,001 - 60,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 50001 and 60000
+union
+select 
+	text('60,001 - 70,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 60001 and 70000
+union
+select 
+	text('70,001 - 80,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 70001 and 80000
+union
+select 
+	text('80,001 - 90,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 80001 and 90000
+union
+select 
+	text('90,001 - 100,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary between 90001 and 100000
+union
+select 
+	text('Over 100,000') as "Salary Range    ", 
+	count(salary) as "Frequency" from salaries
+where salary > 100000
+order by "Salary Range    ";
+
+
+-- What is the average, minimum,and maximum salary by Job Title?
+select
+	title as "Job Title",
+	round(avg(salary),0) as "Average Salary",
+	round(min(salary),0) as "Minimum Salary",
+	round(max(salary),0) as "Maximum Salary"
+from employees
+join titles on titles.title_id = employees.emp_title_id
+join salaries on salaries.emp_no = employees.emp_no
+group by title
+order by "Average Salary" desc;
